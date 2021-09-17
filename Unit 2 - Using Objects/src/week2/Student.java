@@ -2,7 +2,7 @@ package week2;
 
 
 /**
- * A class is a bue print for something that we can model and create variables to use in our code.
+ * A class is a blue print for something that we can model and create variables to use in our code.
  * 
  * This code (class) defines what a Student is
  */
@@ -35,6 +35,15 @@ public class Student {
     this.average = 0;
   }
 
+  public Student(String name, String studentNumber){
+    this.name = name;
+    this.studentNumber = studentNumber;
+    this.grade = 9;
+    this.totalMarks = 0;
+    this.numMarks = 0;
+    this.average = 0;
+  }
+
 
   /**
    * displayName, displayStudentNumber, increaseGrade, display Grade
@@ -42,6 +51,18 @@ public class Student {
    */
   public void displayName() {
     System.out.println(name);
+  }
+
+  /**
+   * Method overloading - methods with the same name but different arguments (parameters)
+   * @param greeting
+   */
+  public void displayName(String greeting){
+    System.out.println(greeting + " " + name);
+  }
+
+  public String getName(){
+    return name;
   }
   /**
    * A void method performs a task and does NOT return a value
@@ -66,6 +87,10 @@ public class Student {
   //naming convention for variable and methods are the same (camelCase)
   public void displayAverage() {
     System.out.println(average);
+  }
+
+  public double getAverage(){
+    return average;
   }
 
   public void addTest(int mark) {
