@@ -31,7 +31,7 @@ public class BayviewGlenPools {
     private static int calculateSurfaceArea(int length, int width, int shallowLength, int shallowHeight, int transition,
             int deepHeight) {
         final double deepLength = (15-(Math.sqrt(24)));
-        int surfaceArea = (int)((shallowHeight*width)+(deepHeight*width)+(shallowLength*shallowHeight*2)+(shallowLength*width)+(transition*width)+(deepLength*width)+(deepLength*deepHeight*2)+(((shallowHeight+deepHeight)/2.0)*(Math.sqrt(24))));
+        int surfaceArea = (int)((shallowHeight*width)+(deepHeight*width)+(shallowLength*width)+(transition*width)+(deepLength*width)+(deepLength*deepHeight*2)+(shallowLength*shallowHeight*2)+(((shallowHeight+deepHeight)/2.0)*(Math.sqrt(24))*2));
         return surfaceArea;
     }
     
