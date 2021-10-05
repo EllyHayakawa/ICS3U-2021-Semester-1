@@ -6,8 +6,8 @@ public class UsingScanner {
     //static Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        exampleOne(in);
-        exampleTwo(in);
+        //exampleOne(in);
+        //exampleTwo(in);
         exampleThree(in);
         in.close();
     }
