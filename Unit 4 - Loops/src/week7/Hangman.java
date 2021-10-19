@@ -74,7 +74,7 @@ public class Hangman {
         while(!validInput){
             System.out.print("Please choose a letter: ");
             letter = in.nextLine().toUpperCase(); //convert user input to upper case
-            if(availableLetters.indexOf(letter)>=0 && letter.length()==1){
+            if(availableLetters.indexOf(letter)>=0 && letter.length()==1 && "_ ".indexOf(letter)<0){
                 validInput = true;
             }else{
                 System.out.println("Invalid choice. Single letters only.");
