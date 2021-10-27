@@ -46,7 +46,7 @@ public class Die {
     }
 
     public boolean equals(Object obj){
-        if(obj == null){
+        if(obj == null){ //make sure obj is not null
             return false;
         }
         if(obj instanceof Die){ //checks to see if obj is an instanceof Die
