@@ -56,8 +56,9 @@ public class Box extends Rectangle{
 
     /**
      * really just gets all the edges
-     */
+     
     public double getPerimeter(){
         return super.getArea() * 2 + 4 * height;
     }
+    */
 }
