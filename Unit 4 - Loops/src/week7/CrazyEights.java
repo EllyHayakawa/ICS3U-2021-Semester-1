@@ -290,8 +290,6 @@ public class CrazyEights {
         String topPileCard = topCard.substring(0, topCard.indexOf(" "));
         String pileRank = cardRank(topPileCard);
         String pileSuit = cardSuit(topPileCard);
-
-        //code so that 8 is NOT played first just because it is at the front of the pile
     
         for(int i = 0; i < computerHand.length(); i+=3){
             String currCard = " ";   
