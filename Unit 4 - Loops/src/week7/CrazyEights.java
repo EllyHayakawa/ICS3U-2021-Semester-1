@@ -151,6 +151,11 @@ public class CrazyEights {
         return result;
     }
 
+    /**
+     * Method that displays Xs to represent the computer's cards
+     * @param computer1
+     * @return
+     */
     private static String displayX(String computer1) {
         String result = "";
         for(int i = 0; i < computer1.length(); i++){
