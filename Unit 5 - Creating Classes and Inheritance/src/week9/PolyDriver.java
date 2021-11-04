@@ -22,5 +22,10 @@ public class PolyDriver {
 
         //animal.chaseTail(); //this will not work because Animal does not have a chaseTail method
         ((Dog)animal).chaseTail(); //cast this as a Dog 
+
+
+        //Gadget g = new Gadget();
+        //Gadget.setStatus(4);
+        //Gadget g2 = new Gadget();
     }
 }
