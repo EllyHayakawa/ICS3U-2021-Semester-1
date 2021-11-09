@@ -2,6 +2,23 @@ package week10;
 
 public class ArrayExamples {
     public static void main(String[] args) {
+        accessArray();
+        iterateAnArray();
+        
+    }
+
+    private static void iterateAnArray(){
+        int[] arr = {5, 3, 2, 5, 2};    //creates an array of length 5, with those integers already in the array
+
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i]; //adding the value stored in the index i in the array
+        }
+
+        System.out.println(sum);
+    }
+
+    private static void accessArray(){
         int[] arr = new int[5];
         Animal[] animals = new Animal[3];
 
