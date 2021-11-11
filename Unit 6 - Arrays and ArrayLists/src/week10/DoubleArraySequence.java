@@ -6,7 +6,7 @@ package week10;
  * four methods that are not available in the sequence class (start, getCurrent,
  * advance and isCurrent).
  *
- * @note (1) The capacity of one a sequence can change after it's created, but
+ * @note (1) The capacity of a sequence can change after it's created, but
  *       the maximum capacity is limited by the amount of free memory on the
  *       machine. The constructor, addAfter, addBefore, clone, and concatenation
  *       will result in an OutOfMemoryError when free memory is exhausted.
@@ -28,7 +28,7 @@ public class DoubleArraySequence {
    // 2. For an empty sequence (with no elements), we do not care what is
    // stored in any of data; for a non-empty sequence, the elements of the
    // sequence are stored in data[0] through data[manyItems-1], and we
-   // don�t care what�s in the rest of data.
+   // don't care what's in the rest of data.
    // 3. If there is a current element, then it lies in data[currentIndex];
    // if there is no current element, then currentIndex equals manyItems.
    private double[] data;
@@ -67,6 +67,9 @@ public class DoubleArraySequence {
     **/
    // Get empty sequence with a specified Capacity
    public DoubleArraySequence(int initialCapacity) {
+      if(initialCapacity < 0){
+         throw new IllegalArgumentException("Initial Capcity must be non-negative");
+      }
       data = new double[initialCapacity];
       manyItems = 0;
       currentIndex = 0;
@@ -81,7 +84,10 @@ public class DoubleArraySequence {
     **/
    // The new double array sequence is a copy of the DoubleArraySequence src.
    public DoubleArraySequence(DoubleArraySequence src) {
-      
+      this.manyItems = src.manyItems;
+      this.currentIndex = src.currentIndex;
+      this.data = src.data;
+      //COPY src.data into this.data
    }
 
    /**
@@ -102,7 +108,27 @@ public class DoubleArraySequence {
     *       the sequence to fail with an arithmetic overflow.
     **/
    public void addAfter(double d) {
+      if(manyItems >= getCapacity()){
+         double[] temp = data;
+         data = new double[getCapacity()*2];
+         for(int i = 0; i < temp.length; i++){
+            data[i] = temp[i];
+         }
+         //data[currentIndex+1] = d;
+         //copy in all of the previous data into the new array
+         data[manyItems] = d;
+         currentIndex++;
+      }else {
+         //if(isCurrent())
+         //for
+         data[manyItems] = d;
+      }
+      //new element becomes new current element
+      manyItems++;
+      //advance();
 
+      //data[manyItems] = d
+      //manyItems++;
    }
 
    /**
@@ -159,7 +185,11 @@ public class DoubleArraySequence {
     *                                  so advance may not be called.
     **/
    public void advance() {
-
+      if(!isCurrent())
+         throw new IllegalStateException("No Current Element!");
+      
+      currentIndex++;
+      
    }
 
    /**
@@ -206,7 +236,7 @@ public class DoubleArraySequence {
     * @return the current capacity of this sequence
     **/
    public int getCapacity() {
-      return -1;
+      return data.length;
    }
 
    /**
@@ -219,7 +249,9 @@ public class DoubleArraySequence {
     *                                  so getCurrent may not be called.
     **/
    public double getCurrent() {
-      return 0;
+      if(!isCurrent())
+         throw new IllegalStateException("No Current Element");
+      return data[currentIndex];
    }
 
    /**
@@ -231,8 +263,7 @@ public class DoubleArraySequence {
     *         element at the moment)
     **/
    public boolean isCurrent() { // see if sequence has a specified current element
-
-      return true;
+      return currentIndex != manyItems;
    }
 
    /**
@@ -258,8 +289,8 @@ public class DoubleArraySequence {
     * @return the number of elements in this sequence
     **/
    public int size() { // Determine the number of elements in this sequence.
-
-      return -1;
+      
+      return manyItems;
    }
 
    /**
@@ -271,7 +302,7 @@ public class DoubleArraySequence {
     *                current element).
     **/
    public void start() {
-
+      currentIndex = 0;
    }
 
    /**
