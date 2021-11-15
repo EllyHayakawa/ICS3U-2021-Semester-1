@@ -117,14 +117,22 @@ public class DoubleArraySequence {
          //data[currentIndex+1] = d;
          //copy in all of the previous data into the new array
          data[manyItems] = d;
+         manyItems++;
          currentIndex++;
       }else {
-         //if(isCurrent())
-         //for
-         data[manyItems] = d;
+         if(isCurrent()  && currentIndex > 0){
+            data[currentIndex+1] = d;
+            currentIndex++;
+         }else if(currentIndex == manyItems && currentIndex == 0)
+            data[manyItems] = d;
+         else{
+            data[manyItems] = d;
+            currentIndex++;
+         }
+         manyItems++;
       }
       //new element becomes new current element
-      manyItems++;
+     // manyItems++;
       //advance();
 
       //data[manyItems] = d
@@ -168,7 +176,23 @@ public class DoubleArraySequence {
     *       an arithmetic overflow that will cause the sequence to fail.
     **/
    public void addAll(DoubleArraySequence addend) {
-
+      int count = 0;
+      for(int i=0; i < addend.manyItems; i++){
+         if(count+manyItems >= getCapacity() && manyItems + addend.manyItems != getCapacity()){
+            double[] temp = data;
+            data = new double[addend.manyItems + manyItems];
+            count = 0;
+            for(int j = 0; j < temp.length; j++){
+               data[j] = temp[j];
+               count++;
+           
+            }
+         }
+         data[i + manyItems] = addend.data[i];
+         count++;
+         
+      }
+      manyItems=count;
    }
 
    /**
@@ -224,7 +248,15 @@ public class DoubleArraySequence {
     *                             int[minimumCapacity].
     **/
    public void ensureCapacity(int minimumCapacity) {
-
+      if(getCapacity() < minimumCapacity){
+         //change capacity
+         double[] temp = data;
+         data = new double[minimumCapacity];
+         for(int i = 0; i < temp.length; i++){
+            data[i] = temp[i];
+         }
+      }
+         
    }
 
    /**
@@ -315,7 +347,11 @@ public class DoubleArraySequence {
     *                             capacity.
     **/
    public void trimToSize() {
-
+      double[] temp = data;
+      data = new double[getCapacity()*2];
+      for(int i = 0; i < manyItems; i++){
+         data[i] = temp[i];
+      }
    }
 
    public int getCurrentIndex() {
