@@ -157,7 +157,10 @@ public class DoubleArraySequence {
     *       the sequence to fail with an arithmetic overflow.
     **/
    public void addBefore(double element) {
-
+      //check capacity
+      data[currentIndex - 1] = element;
+      manyItems++;
+      currentIndex--;
    }
 
    /**
