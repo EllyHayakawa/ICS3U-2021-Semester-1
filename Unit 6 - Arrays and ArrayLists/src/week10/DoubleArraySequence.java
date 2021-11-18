@@ -158,9 +158,21 @@ public class DoubleArraySequence {
     **/
    public void addBefore(double element) {
       //check capacity
-      data[currentIndex - 1] = element;
+      if(manyItems >= getCapacity()){
+         double[] temp = data;
+         data = new double[getCapacity()*2];
+         for(int i = 0; i < temp.length; i++){
+            data[i] = temp[i];
+         }
+      }
+
+      for(int i = manyItems; i > currentIndex; i--){
+         data[i] = data[i-1];
+      }
+      
+      data[currentIndex] = element;
       manyItems++;
-      currentIndex--;
+      
    }
 
    /**
@@ -314,7 +326,10 @@ public class DoubleArraySequence {
     *                                  so removeCurrent may not be called.
     **/
    public void removeCurrent() {
-
+      if(isCurrent()){
+         //remove current element, shift all elements
+         //no following element, no current element
+      }
    }
 
    /**
