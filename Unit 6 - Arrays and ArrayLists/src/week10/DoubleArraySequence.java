@@ -131,12 +131,7 @@ public class DoubleArraySequence {
          }
          manyItems++;
       }
-      //new element becomes new current element
-     // manyItems++;
-      //advance();
-
-      //data[manyItems] = d
-      //manyItems++;
+      
    }
 
    /**
@@ -248,7 +243,20 @@ public class DoubleArraySequence {
     *       sequence to fail.
     **/
    public static DoubleArraySequence catenation(DoubleArraySequence s1, DoubleArraySequence s2) {
-      return null;
+      DoubleArraySequence arr = new DoubleArraySequence(s1.manyItems + s2.manyItems);
+      //double temp[] = new double[s1.manyItems + s2.manyItems];
+      for(int i = 0; i < s1.manyItems; i++){
+         arr.data[i] = s1.data[i];
+         arr.manyItems++;
+         arr.currentIndex++;
+      } 
+      for(int i = 0; i < s2.manyItems; i++){
+         arr.data[i + s1.manyItems] = s2.data[i];
+         arr.manyItems++;
+         arr.currentIndex++;
+      }
+      
+      return arr;
 
    }
 
@@ -327,9 +335,17 @@ public class DoubleArraySequence {
     **/
    public void removeCurrent() {
       if(isCurrent()){
-         //remove current element, shift all elements
-         //no following element, no current element
-      }
+         for(int i = 0; i < manyItems; i++){
+            data[i] = data[i+1];
+         }
+         
+         if(currentIndex > 0){
+            currentIndex--;
+         }
+         
+         manyItems--;
+      }else
+         throw new IllegalStateException("No Current Element");
    }
 
    /**

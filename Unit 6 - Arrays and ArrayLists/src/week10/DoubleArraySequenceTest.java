@@ -18,7 +18,7 @@ public class DoubleArraySequenceTest {
       score += test(d2, new double[] {}, 0, 0, 5, 2);
       score += test(d3, new double[] {}, 0, 0, 5, 2); //check COPY
 
-      d2.addAfter(1.0);
+      d2.addAfter(1.0); //check addAfter (and currentIndex)
       score += test(d2, new double[] { 1.0 }, 0, 1, 5, 2);
       d2.addAfter(2.0);
       d2.addAfter(3.0);
