@@ -114,8 +114,6 @@ public class DoubleArraySequence {
          for(int i = 0; i < temp.length; i++){
             data[i] = temp[i];
          }
-         //data[currentIndex+1] = d;
-         //copy in all of the previous data into the new array
          data[manyItems] = d;
          manyItems++;
          currentIndex++;
