@@ -121,9 +121,9 @@ public class DoubleArraySequence {
          if(isCurrent()  && currentIndex > 0){
             data[currentIndex+1] = d;
             currentIndex++;
-         }else if(currentIndex == manyItems && currentIndex == 0)
+         }else if(!isCurrent()){
             data[manyItems] = d;
-         else{
+         }else{
             data[manyItems] = d;
             currentIndex++;
          }
@@ -150,7 +150,6 @@ public class DoubleArraySequence {
     *       the sequence to fail with an arithmetic overflow.
     **/
    public void addBefore(double element) {
-      //check capacity
       if(manyItems >= getCapacity()){
          double[] temp = data;
          data = new double[getCapacity()*2];
@@ -159,8 +158,15 @@ public class DoubleArraySequence {
          }
       }
 
-      for(int i = manyItems; i > currentIndex; i--){
-         data[i] = data[i-1];
+      if(isCurrent()){ 
+         for(int i = manyItems; i > currentIndex; i--){
+            data[i] = data[i-1];
+         }
+      }else{
+         for(int i = manyItems; i > 0; i--){
+            data[i] = data[i-1];
+         }
+         currentIndex = 0;
       }
       
       data[currentIndex] = element;
@@ -184,6 +190,9 @@ public class DoubleArraySequence {
     *       an arithmetic overflow that will cause the sequence to fail.
     **/
    public void addAll(DoubleArraySequence addend) {
+      if(addend == null)
+         throw new NullPointerException();
+
       int count = 0;
       for(int i=0; i < addend.manyItems; i++){
          if(count+manyItems >= getCapacity() && manyItems + addend.manyItems != getCapacity()){
@@ -200,7 +209,7 @@ public class DoubleArraySequence {
          count++;
          
       }
-      manyItems=count;
+      manyItems = count;
    }
 
    /**
@@ -242,7 +251,7 @@ public class DoubleArraySequence {
     **/
    public static DoubleArraySequence catenation(DoubleArraySequence s1, DoubleArraySequence s2) {
       DoubleArraySequence arr = new DoubleArraySequence(s1.manyItems + s2.manyItems);
-      //double temp[] = new double[s1.manyItems + s2.manyItems];
+
       for(int i = 0; i < s1.manyItems; i++){
          arr.data[i] = s1.data[i];
          arr.manyItems++;
@@ -270,7 +279,6 @@ public class DoubleArraySequence {
     **/
    public void ensureCapacity(int minimumCapacity) {
       if(getCapacity() < minimumCapacity){
-         //change capacity
          double[] temp = data;
          data = new double[minimumCapacity];
          for(int i = 0; i < temp.length; i++){
